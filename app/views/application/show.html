@@ -1,0 +1,97 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Your  application' %}
+
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+<h1 class="govuk-heading-l"> {{ pageName }}</h1>
+
+<h2 class="govuk-heading-s  govuk-!-margin-top-6  govuk-!-margin-bottom-2" > Application incomplete</h2>
+
+<p class=" govuk-!-margin-bottom-6"> You've completed 0 of 3 sections.</p>
+
+
+<h2 class="govuk-heading-m govuk-!-margin-top-5">About you</h2>
+{{ govukTaskList({
+    idPrefix: "personal-details",
+    items: [
+      {
+        title: {
+          text: "Personal details"
+        },
+        href: "#",
+        status: {
+            tag: {
+              text: "Not started",
+              classes: "govuk-tag--grey"
+            }
+          }
+      }
+      
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-5">Professional experience</h2>
+
+  {{ govukTaskList({
+    idPrefix: "experience",
+    items: [
+      {
+        title: {
+          text: "Professional experience"
+        },
+        href: "#",
+        status: {
+            tag: {
+              text: "Not started",
+              classes: "govuk-tag--grey"
+            }
+          }
+      }
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-5">Evidence</h2>
+
+  {{ govukTaskList({
+    idPrefix: "Evidence",
+    items: [
+      {
+        title: {
+          text: "Evidence"
+        },
+        href: "#",
+        status: {
+            tag: {
+              text: "Not started",
+              classes: "govuk-tag--grey"
+            }
+          }
+      }
+    ]
+  }) }}
+
+
+<h2 class="govuk-heading-m">Review application</h2>
+
+{{ govukButton({
+    text:" Review and send",
+    href: "/application/check"
+}) }}
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+{% endblock %}
