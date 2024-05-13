@@ -23,11 +23,11 @@
         title: {
           text: "Personal details"
         },
-        href: "#",
+        href: "/application/edit-personal-details/name",
         status: {
             tag: {
-              text: "Not started",
-              classes: "govuk-tag--grey"
+              text: data.personalDetails.status or  "Not started",
+              classes: data.personalDetails.status | statusTag
             }
           }
       }
@@ -44,11 +44,11 @@
         title: {
           text: "Professional experience"
         },
-        href: "#",
+        href: "/application/edit-experience/years-of-experience",
         status: {
             tag: {
-              text: "Not started",
-              classes: "govuk-tag--grey"
+              text: data.experience.status or  "Not started",
+              classes: data.experience.status | statusTag
             }
           }
       }
@@ -64,7 +64,7 @@
         title: {
           text: "Evidence"
         },
-        href: "#",
+        href: "/application/edit-evidence/has-evidence",
         status: {
             tag: {
               text: "Not started",

@@ -1,0 +1,86 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Uploaded evidence' %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "/application"
+}) }}
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl">Evidence</span>
+<h1 class="govuk-heading-l"> {{pageName}}</h1>
+{{ data | log }}
+
+<p>list the files they uploaded</p>
+
+<form method="POST" novalidate>
+
+
+
+
+{{ govukRadios({
+  name: "evidence[addMore]",
+  fieldset: {
+    legend: {
+      text: "Do you want to upload another file?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
+    }
+  ],
+  value: data.evidence.addMore
+}) }}
+
+{{ govukButton({
+  text: "Continue and save"
+}) }}
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+</form>
+  
+
+
+  </div>
+</div>
+
+{% endblock %}

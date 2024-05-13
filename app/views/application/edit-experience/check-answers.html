@@ -1,0 +1,154 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Check your answers' %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+  text: "Back",
+  href: "/application"
+}) }}
+
+
+{% endblock %}
+{% set address %}
+
+{{data.personalDetails.address.line1 }} <br>
+ {%if data.personalDetails.address.line2 %}
+ {{ data.personalDetails.address.line2 }} <br>
+ {% endif %}
+
+{{data.personalDetails.address.town}} <br>
+{%if data.personalDetails.address.county %}
+ {{ data.personalDetails.address.county }} <br>
+ {% endif %}
+
+ {{data.personalDetails.address.postcode}}
+
+
+{% endset %}
+
+
+{% block content %}
+
+
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl">Professional experience</span>
+<h1 class="govuk-heading-l"> {{pageName}}</h1>
+
+
+<form method="POST" novalidate>
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "How many years of experience you have in UX Design?"
+      },
+      value: {
+        text: data.new.yearsOfExperience
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/edit-experience/years-of-experience",
+            text: "Change",
+            visuallyHiddenText: "How many years of experinece you have? "
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "What is the area of your expertise?"
+      },
+      value: {
+        text: data.new.expertise
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/edit-experience/expertise",
+            text: "Change",
+            visuallyHiddenText: "Your telephone number"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "When did you start working as UX designer?"
+      },
+      value: {
+        html:  data.experience.startDate| isoDateFromDateInput | govukDate
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/edit-experience/start-date",
+            text: "Change",
+            visuallyHiddenText: "What is the area of your expertise?"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+
+{{ govukRadios({
+  name: "experience[status]",
+  fieldset: {
+    legend: {
+      text: "Have you completed this section?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    },
+    hint: "You can still make changes to a completed section"
+  },
+  items: [
+    {
+      value: "Completed",
+      text: "Yes, I’ve completed this section"
+    },
+    {
+      value: "Incomplete",
+      text: "No, I’ll come back to it later"
+    }
+  ],
+  value: data.experience.status
+}) }}
+
+{{ govukButton({
+  text: "Continue and save"
+}) }}
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+</form>
+  
+
+
+  </div>
+</div>
+
+{% endblock %}

@@ -34,18 +34,18 @@ router.post ('/email-address', (req,res) =>  {
           
 )
 
-router.post ('/code', (req,res) =>  {
 
-    res.redirect ('/application')
-  }
-       
-         
-)
 
 router.post ('/code', (req, res) =>  {
-req.session.data.user = {}
+req.session.data.user ={ }
   res.redirect ('/application')
 })
+
+
+router.get ('/account/sign-out', (req, res) =>  {
+  delete req.session.data.user
+    res.redirect ('/has-account')
+  })
 
 
 
@@ -54,3 +54,8 @@ req.session.data.user = {}
 
 
 require('./routes/application/show')(router)
+require('./routes/application/edit-personal-details')(router)
+require('./routes/application/edit-experience')(router)
+require('./routes/application/edit-evidence')(router)
+
+
