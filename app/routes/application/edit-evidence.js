@@ -78,9 +78,52 @@ router.post ('/application/edit-evidence/check-files', (req,res)   => {
 
 
  }
-           
-              
-              })
+ })
+
+ router.get('/application/edit-evidence/:fileId/delete', (req,res)   => {
+  let file = req.session.data.evidence.files[req.params.fileId]
+  res.render ('application/edit-evidence/delete', {file})
+
+
+})
+
+router.post('/application/edit-evidence/:fileId/delete', (req,res)   => {
+  delete req.session.data.evidence.files[req.params.fileId]
+  let filesCount = _.size(req.session.data.evidence.files)
+
+if ( filesCount > 0){
+  res.redirect ('/application/edit-evidence/check-files')}
+
+else {
+
+  res.redirect ('/application/edit-evidence/has-evidence')
+
+}
+
+
+})
+
+router.post ('/application/edit-evidence/check-answers', (req,res)   => {
+    
+   
+  res.redirect('/application/show')
+
+
+  
+
+    
+    
+    })
+
+
+
+
+
+
+  
+
+
+}
 
 
 
@@ -89,6 +132,12 @@ router.post ('/application/edit-evidence/check-files', (req,res)   => {
 
 
 
-        
-    }    
 
+
+
+
+
+
+
+
+            

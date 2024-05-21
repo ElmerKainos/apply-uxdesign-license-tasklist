@@ -1,0 +1,46 @@
+
+
+
+
+
+
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Do you have evidence to upload?"
+      },
+      value: {
+        text: data.evidence.hasEvidence
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/edit-evidence/has-evidence",
+            text: "Change",
+            visuallyHiddenText: "if you have evidence to upload "
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Uploaded evidence"
+      },
+      value: {
+        html: files
+      },
+      actions: {
+        items: [
+          {
+            href: "/application/edit-evidence/check-files",
+            text: "Change",
+            visuallyHiddenText: "Uploaded evidence"
+          }
+        ]
+      }
+    }
+    
+  ]
+}) }}

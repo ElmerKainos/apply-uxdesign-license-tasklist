@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Check your answers' %}
+{% set pageName = 'Check details and confirm your answers' %}
 
 {% block beforeContent %}
 
@@ -11,22 +11,6 @@
 
 
 {% endblock %}
-{% set address %}
-
-{{data.personalDetails.address.line1 }} <br>
- {%if data.personalDetails.address.line2 %}
- {{ data.personalDetails.address.line2 }} <br>
- {% endif %}
-
-{{data.personalDetails.address.town}} <br>
-{%if data.personalDetails.address.county %}
- {{ data.personalDetails.address.county }} <br>
- {% endif %}
-
- {{data.personalDetails.address.postcode}}
-
-
-{% endset %}
 
 
 {% block content %}
@@ -36,8 +20,26 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <span class="govuk-caption-xl">Professional experience</span>
+    <span class="govuk-caption-xl">Evidence</span>
 <h1 class="govuk-heading-l"> {{pageName}}</h1>
+
+
+{% set files %}
+
+{% for fileId, file in data.evidence.files %}
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    <a href='#'> {{file.filename}}</a>
+  </li>
+
+</ul>
+{% endfor %}
+
+{% endset %}
+
+
+
+
 
 
 <form method="POST" novalidate>
@@ -46,61 +48,45 @@
   rows: [
     {
       key: {
-        text: "How many years of experience you have in UX Design?"
+        text: "Do you have evidence to upload?"
       },
       value: {
-        text: data.new.yearsOfExperience
+        text: data.evidence.hasEvidence
       },
       actions: {
         items: [
           {
-            href: "/application/edit-experience/years-of-experience",
+            href: "/application/edit-evidence/has-evidence",
             text: "Change",
-            visuallyHiddenText: "How many years of experinece you have? "
+            visuallyHiddenText: "if you have evidence to upload "
           }
         ]
       }
     },
     {
       key: {
-        text: "What is the area of your expertise?"
+        text: "Uploaded evidence"
       },
       value: {
-        text: data.new.expertise
+        html: files
       },
       actions: {
         items: [
           {
-            href: "/application/edit-experience/expertise",
+            href: "/application/edit-evidence/check-files",
             text: "Change",
-            visuallyHiddenText: "Your telephone number"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "When did you start working as UX designer?"
-      },
-      value: {
-        html:  data.experience.startDate| isoDateFromDateInput | govukDate
-      },
-      actions: {
-        items: [
-          {
-            href: "/application/edit-experience/start-date",
-            text: "Change",
-            visuallyHiddenText: "What is the area of your expertise?"
+            visuallyHiddenText: "Uploaded evidence"
           }
         ]
       }
     }
+    
   ]
 }) }}
 
 
 {{ govukRadios({
-  name: "experience[status]",
+  name: "evidence[status]",
   fieldset: {
     legend: {
       text: "Have you completed this section?",
@@ -119,13 +105,12 @@
       text: "No, I’ll come back to it later"
     }
   ],
-  value: data.experience.status
+  value: data.evidence.status
 }) }}
 
 {{ govukButton({
   text: "Continue and save"
 }) }}
-
  
 
 

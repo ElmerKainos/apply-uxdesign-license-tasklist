@@ -23,9 +23,25 @@
   <div class="govuk-grid-column-two-thirds">
     <span class="govuk-caption-xl">Evidence</span>
 <h1 class="govuk-heading-l"> {{pageName}}</h1>
-{{ data | log }}
 
-<p>list the files they uploaded</p>
+
+
+
+<dl class="govuk-summary-list">
+  {% for fileId, file in data.evidence.files %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      File{{loop.index}}
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a href = "#">{{file.filename}} </a>
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="/application/edit-evidence/{{fileId}}/delete">Delete<span class="govuk-visually-hidden"> name</span></a>
+    </dd>
+  </div>
+ {% endfor %}
+</dl>
 
 <form method="POST" novalidate>
 
@@ -50,8 +66,7 @@
       value: "No",
       text: "No"
     }
-  ],
-  value: data.evidence.addMore
+  ]
 }) }}
 
 {{ govukButton({

@@ -66,10 +66,10 @@
         },
         href: "/application/edit-evidence/has-evidence",
         status: {
-            tag: {
-              text: "Not started",
-              classes: "govuk-tag--grey"
-            }
+          tag: {
+            text: data.evidence.status or  "Not started",
+            classes: data.evidence.status | statusTag
+          }
           }
       }
     ]
